@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Amazing Ads Manager
-Plugin URI: https://www.naijadomains.com/amazing-ads-manager/
+Plugin URI: http://naijadomains.com/amazing-themes/plugin/adsManager/
 Description: Amazing Ads Manager is easy to use plugin providing a flexible logic of displaying advertisements, Randomly and Customizable  display of advertisements on single post page or category archive page by category (categories) or custom post types. Amazing Ads Mnager includes all Google Adsense Display and Text Unit Sizes.
-Version: 0.0.1
+Version: 0.0.2
 Author: Amazing Themes
 Author URI: http://naijadomains.com/amazing-themes/
 License:           GPL-2.0+
@@ -193,6 +193,22 @@ if(!class_exists('AmazingAds')) {
 		public function create_meta_box(){
 			global $post;
 			$custom_fields = get_post_custom($post->ID);
+				if(!isset($custom_fields['ad_sizes'][0])){
+					$custom_fields['ad_sizes'][0]="";
+				}
+				if(!isset($custom_fields['ad_type'][0])){
+					$custom_fields['ad_type'][0]="";
+				}
+				if(!isset($custom_fields['amads_link'][0])){
+					$custom_fields['amads_link'][0]="";
+				}
+				if(!isset($custom_fields['amads_image'][0])){
+					$custom_fields['amads_image'][0]="";
+				}
+				if(!isset($custom_fields['amads_codes'][0])){
+					$custom_fields['amads_codes'][0]="";
+				}
+				
 			?>
             <div class="input-holder">
                 <label for="ads-size">Select Ads Size</label>
@@ -255,10 +271,13 @@ if(!class_exists('AmazingAds')) {
 		public function update_custom_meta_fields()	{
 
 			//disable autosave,so custom fields will not be empty
-			if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE )
+		
+			if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+			
 		        return $post_id;
 
 				global $post;
+				if(isset($_POST['post_type'])=="amadsmananger"){
 				switch($_POST['ad_type']){
 					case "image":update_post_meta($post->ID, "amads_image", trim($_POST["amads_image"]));
 								update_post_meta($post->ID, "amads_link", trim($_POST["amads_link"]));
@@ -272,6 +291,7 @@ if(!class_exists('AmazingAds')) {
 			update_post_meta($post->ID, "amads_title", trim($_POST["post_title"]));
 			update_post_meta($post->ID, "amads_shortcode", 
 							'[amads id="'.$post->ID.'" size="'.trim($_POST["ad_sizes"]).'" title="'.$_POST['post_title'] .'"]');
+				}
 
 		}
 		// create Shortcode
