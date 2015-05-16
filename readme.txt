@@ -1,5 +1,5 @@
 === Amazing Ads Manager ===
-Contributors: Victor TIN (mrdonrule)
+Contributors:mrdonrule,amazingthemes
 Donate link: https://www.naijadomains.com/amazing-ads-manager/
 Tags: ad, admin, adsense, adserver, advertisement, advertising, affiliate, banner, google, manager, rotate, widget
 Requires at least: 3.5
