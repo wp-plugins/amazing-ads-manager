@@ -355,7 +355,4 @@ class amAds_Codes_Widgets extends WP_Widget
 	<?php
 	}
 }
-
-
 ?>
-
