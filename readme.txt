@@ -3,8 +3,8 @@ Contributors:mrdonrule,amazingthemes
 Donate link: https://www.naijadomains.com/amazing-ads-manager/
 Tags: ad, admin, adsense, adserver, advertisement, advertising, affiliate, banner, google, manager, rotate, widget
 Requires at least: 3.5
-Tested up to: 4.2.1
-Stable tag: 4.2.1
+Tested up to: 4.2.3
+Stable tag: 4.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,12 +16,15 @@ Randomly and Customizable display of advertisements on single post page or categ
 
 Features Of Amazing Ads Manager:
 
-* Widget can be used to place ads in the sidebar
-* In widget you can select to display ads randomly, Newest, Oldest, or specificaly by ID
-* Put ads in your blog posts with the click of a button to insert short codes
-* Ads can be placed in your templates with a single PHP function
+* Place ad using widget
+* In widget you can select to display ad randomly, Newest, Oldest, or specificaly by ID
+* Insert ad in single, page, or custom post using shortcode
 * Ad targeting by author, category, tag, page type, and much more
 * Auto-recognition for the most popular ad networks.
+* Add Single Image Ad on widget
+* Add Single Code Ad on widget
+* Auto Insert add to post/page/custom post content.
+* Randomly display add in single page
 
 == Installation ==
 
@@ -49,8 +52,12 @@ Features Of Amazing Ads Manager:
 1. Create New ad Image in Wordpress 4.2.1
 1. Create New ad Codes in Wordpress 4.2.1
 1. Ad setting on widget in Wordpress 4.2.1
+1. Sample of auto insert ad on single post in WordPress 4.2.3
 
 == Changelog ==
+= 0.0.4 =
+* Added Two more widget option for custom ad placer
+* Added setting for auto insert ad on single/page content
 
 = 0.0.3 =
 * Compatibility fix with wordpress 4.2.2
@@ -63,6 +70,9 @@ Features Of Amazing Ads Manager:
 * Initial Version.
 
 == Upgrade Notice ==
+= 0.0.4 =
+* Added Two more widget option for custom ad placer
+* Added setting for auto insert ad on single/page content
 
 = 0.0.3 =
 * Compatibility fix with wordpress 4.2.2
