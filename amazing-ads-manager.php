@@ -193,7 +193,7 @@ if(!class_exists('AmazingAds')) {
 				$this->amads_option=get_option(self::post_type);
 				if($this->amads_option['amads-bppc-e']==true){
 					$newcontent=$this->amadsDisplay($this->amads_option['amads-as'],$this->amads_option['amads-adot'],$this->amads_option['amads-limit']);
-					echo  $newcontent.$amads_data_content;
+					return  $newcontent.$amads_data_content;
 				}else {
 					return $amads_data_content;
 				}
@@ -209,7 +209,7 @@ if(!class_exists('AmazingAds')) {
 				$this->amads_option=get_option(self::post_type);
 				if($this->amads_option['amads-appc-e']==true){
 					$newcontent=$this->amadsDisplay($this->amads_option['amads-aas'],$this->amads_option['amads-aadot'],$this->amads_option['amads-alimit']);
-					echo  $amads_data_content.$newcontent;
+					return  $amads_data_content.$newcontent;
 				}else {
 					return $amads_data_content;
 				}
