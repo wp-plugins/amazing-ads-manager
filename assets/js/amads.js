@@ -108,7 +108,7 @@ jQuery.noConflict();
   if(pagenow=="amadsmananger"){
 		aMads.Postype();
 	}
-	if(pagenow=="widgets"){
+	else{
   		aMads.widget();
 	}
   })
