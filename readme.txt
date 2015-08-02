@@ -55,6 +55,10 @@ Features Of Amazing Ads Manager:
 1. Sample of auto insert ad on single post in WordPress 4.2.3
 
 == Changelog ==
+= 0.0.5 =
+* Widget js fix
+* js conflict fix
+
 = 0.0.4 =
 * Added Two more widget option for custom ad placer
 * Added setting for auto insert ad on single/page content
@@ -70,6 +74,10 @@ Features Of Amazing Ads Manager:
 * Initial Version.
 
 == Upgrade Notice ==
+= 0.0.5 =
+* Widget js fix
+* js conflict fi
+
 = 0.0.4 =
 * Added Two more widget option for custom ad placer
 * Added setting for auto insert ad on single/page content

@@ -3,7 +3,7 @@
 Plugin Name: Amazing Ads Manager
 Plugin URI: http://naijadomains.com/amazing-themes/plugin/adsManager/
 Description: Amazing Ads Manager is easy to use plugin providing a flexible logic of displaying advertisements, Randomly and Customizable  display of advertisements on single post page or category archive page by category (categories) or custom post types. Amazing Ads Mnager includes all Google Adsense Display and Text Unit Sizes.
-Version: 0.0.4
+Version: 0.0.5
 Author: Amazing Themes
 @Compatibility WP 3.5+
 Author URI: http://naijadomains.com/amazing-themes/
@@ -46,10 +46,10 @@ $adsizes = array(
 		);
 if(!class_exists('AmazingAds')) {
 	class AmazingAds {
-		var $adsizesm,$amads_option=array();
+		var $adsizes,$amads_option=array();
 		//constants
 		const CAPABILITY = 'manage_options';
-		const VERSION = '0.0.4';
+		const VERSION = '0.0.5';
 		const VERSION_FIELD_NAME = 'amAdsmanager_var';
 		const post_type ="amAdsMananger";
 		//Constructer
@@ -59,7 +59,8 @@ if(!class_exists('AmazingAds')) {
 					
 
 			//action hooks
-			add_action( 'admin_init', array( &$this,'init_admin') );
+			add_action( 'admin_init', array( &$this,'amads_init_admin') );
+			add_action('load-widgets.php',array(&$this,'enqueue_script') );
 			add_action( 'after_setup_theme', array( &$this, 'setup_amAds' ) );
 			add_action('widgets_init',array(&$this,'amads_widget'));
 			add_action( 'manage_posts_custom_column', array( &$this, 'posts_custom_column' ), 10, 2 );
@@ -113,7 +114,7 @@ if(!class_exists('AmazingAds')) {
 			 'register_meta_box_vo' => array(&$this, 'add_meta_boxes')
 			);
 			
-			register_post_type( self::post_type, $amAd_args );
+			register_post_type( AmazingAds::post_type, $amAd_args );
 			
 
 			}
@@ -190,7 +191,7 @@ if(!class_exists('AmazingAds')) {
 			*/
 			public function amads_b_content($amads_data_content){
 				//global $post;
-				$this->amads_option=get_option(self::post_type);
+				$this->amads_option=get_option(AmazingAds::post_type);
 				if($this->amads_option['amads-bppc-e']==true){
 					$newcontent=$this->amadsDisplay($this->amads_option['amads-as'],$this->amads_option['amads-adot'],$this->amads_option['amads-limit']);
 					return  $newcontent.$amads_data_content;
@@ -206,7 +207,7 @@ if(!class_exists('AmazingAds')) {
 			*/
 			public function amads_a_content($amads_data_content){
 				//global $post;
-				$this->amads_option=get_option(self::post_type);
+				$this->amads_option=get_option(AmazingAds::post_type);
 				if($this->amads_option['amads-appc-e']==true){
 					$newcontent=$this->amadsDisplay($this->amads_option['amads-aas'],$this->amads_option['amads-aadot'],$this->amads_option['amads-alimit']);
 					return  $amads_data_content.$newcontent;
@@ -249,25 +250,35 @@ if(!class_exists('AmazingAds')) {
 				}
 
 			// initialize admin 
-		public function init_admin() {
+		public function amads_init_admin() {
 				// Localize wp version
 				global $typenow, $wp_version;
 				if(version_compare($wp_version, '3.5', '<'))
 				{
 					add_action( 'admin_notices', array(&$this,'my_admin_error_notice')); 
 				
-				}		
-			 	wp_enqueue_script('amads-admin-js', plugins_url('/assets/js/amads.js', __FILE__));
-				if(!get_option(self::post_type)){
-				add_option(self::post_type,$this->settingDefault());
+				}	
+				
+			 	
+				if(!get_option(AmazingAds::post_type)){
+				add_option(AmazingAds::post_type,$this->settingDefault());
 				}
-				if(function_exists( 'wp_enqueue_media' )){
-								wp_enqueue_media();
-							}else{
-								wp_enqueue_style('thickbox');
-								wp_enqueue_script('media-upload');
-								wp_enqueue_script('thickbox');					
-				}
+				
+		}
+		// enqueue script for amads
+		public function enqueue_script(){			
+		
+				wp_enqueue_script('amads-admin-js', plugins_url('/assets/js/amads.js', __FILE__));
+				
+				
+					if(function_exists( 'wp_enqueue_media' )){
+							wp_enqueue_media();
+						}else{
+							wp_enqueue_style('thickbox');
+							wp_enqueue_script('media-upload');
+							wp_enqueue_script('thickbox');
+					
+			}
 		}
 		/*
 		*	add Amazing Ads Manager to admin menu
@@ -278,7 +289,7 @@ if(!class_exists('AmazingAds')) {
 			$addnew = add_submenu_page( 'edit.php?post_type=amadsmananger',
 										__( 'Ads Settings' ),
 										__( 'Ads Settings' )
-										,self::CAPABILITY,
+										,AmazingAds::CAPABILITY,
 										'ads-setting',array(&$this, 'amAds_setting')
 									);
 							}
@@ -286,9 +297,9 @@ if(!class_exists('AmazingAds')) {
 			if(isset($_POST['sec_code'])){
 				$amads_option =$_POST;
 				unset($amads_option['sec_code'],$amads_option['amads_save']);
-				update_option(self::post_type,$amads_option);
+				update_option(AmazingAds::post_type,$amads_option);
 			}
-				$this->amads_option=get_option(self::post_type);
+				$this->amads_option=get_option(AmazingAds::post_type);
 			?>
 			<div class='amadsWrapper'>
 				<div class="amads-header"><h2>Amazing Ads Manager Settings</h2></div>
@@ -411,7 +422,10 @@ if(!class_exists('AmazingAds')) {
 		}
 		//add meta box in the "Add New Ads" page
 				public function add_custom_box() {
-					global $pagenow,$typenow;				
+					global $pagenow,$typenow;		
+					 if ( $typenow=='amadsmananger' ) {
+					$this->enqueue_script();
+			}		
 					add_meta_box('amads-meta-box', 'Ads Manager Option', array( &$this, 'create_meta_box'), 'amadsmananger', 'normal', 'high');
 				}
 		

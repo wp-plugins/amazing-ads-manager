@@ -1,7 +1,7 @@
 	/*	
 	*	Amazing Ads Manager BackEnd Css File
 	*	---------------------------------------------------------------------
-	* 	@version	0.0.4
+	* 	@version	0.0.5
 	* 	Author: Amazing Themes
 	*	Author URI: http://naijadomains.com/amazing-themes/
 	*	---------------------------------------------------------------------
@@ -62,6 +62,7 @@ i.amads-own-icon {
 	border:1px solid #CFCFCF;
 	background:rgb(255,255,255);
 	font-family:'Open San', sans-serif;
+	margin-top:20px;
 }
 .amads-header {
 	background:#CFCFCF;
