@@ -3,8 +3,8 @@ Contributors:mrdonrule,amazingthemes
 Donate link: https://www.naijadomains.com/amazing-ads-manager/
 Tags: ad, admin, adsense, adserver, advertisement, advertising, affiliate, banner, google, manager, rotate, widget
 Requires at least: 3.5
-Tested up to: 4.2.3
-Stable tag: 4.2.2
+Tested up to: 4.3
+Stable tag: 4.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
